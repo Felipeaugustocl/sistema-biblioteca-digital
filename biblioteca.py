@@ -1,5 +1,3 @@
-# Lista para armazenar os metadados dos documentos.
-# Cada documento será um dicionário com 'nome', 'tipo' e 'ano'.
 documentos_db = []
 
 def adicionar_documento():
@@ -9,23 +7,36 @@ def adicionar_documento():
     tipo = input("Digite o tipo do arquivo (ex: PDF, ePUB, DOCX): ")
     ano = input("Digite o ano de publicação: ")
 
-    # Neste passo, ainda não temos validações ou conversão de tipo para o ano.
     documento = {"nome": nome, "tipo": tipo, "ano": ano}
     documentos_db.append(documento)
     print(f"Documento '{nome}' adicionado com sucesso!")
+
+def listar_documentos(): # NOVA FUNÇÃO
+    """Lista todos os documentos cadastrados."""
+    if not documentos_db:
+        print("\nNenhum documento cadastrado no sistema.")
+        return
+
+    print("\n--- Todos os Documentos (Ordem de Adição) ---")
+    for i, doc in enumerate(documentos_db):
+        # Formatamos a saída para nome, tipo e ano.
+        print(f"{i+1}. Nome: {doc['nome']}, Tipo: {doc['tipo']}, Ano: {doc['ano']}")
 
 def menu_principal():
     """Exibe o menu principal e gerencia a interação com o usuário."""
     while True:
         print("\n====== Sistema de Gestão de Documentos da Biblioteca ======")
         print("1. Adicionar Documento")
-        print("5. Sair") # Usaremos 5 para Sair por enquanto, ajustaremos depois.
+        print("2. Listar Documentos") # NOVA OPÇÃO
+        print("5. Sair")
         print("==========================================================")
 
         escolha = input("Escolha uma opção: ")
 
         if escolha == '1':
             adicionar_documento()
+        elif escolha == '2': # NOVA CONDIÇÃO
+            listar_documentos()
         elif escolha == '5':
             print("Saindo do sistema. Até logo!")
             break
